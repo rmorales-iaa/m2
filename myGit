@@ -1,0 +1,24 @@
+#!/bin/bash
+
+#Message
+
+echo "Remove directories"
+
+
+echo "get last changes"
+git pull
+
+echo "upload changes to git"
+
+echo "git add . --all"
+git add .
+
+echo "git commit -am $1"
+git commit -am "$1"
+
+echo "git push"
+git push
+
+
+echo "myGit ends"
+#End

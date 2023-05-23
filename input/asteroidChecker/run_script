@@ -1,0 +1,20 @@
+#!/bin/bash
+#---------------------------
+MPC_FILE=$1
+MAX_DISTANCE=$2    #distance in arcseconds
+SOF_FILE=$3
+OUTPUT_FILE=$4
+#---------------------------
+MAX_TOLERANCE=20  #arcsec/hr
+MAX_MANITUDE=50
+MAX_RESULT=5
+#---------------------------
+cd /home/rafa/images/tools/find_orb/
+#---------------------------
+#debug
+set -x
+#---------------------------
+#run astcheck
+./astcheck $MPC_FILE -r $MAX_DISTANCE -z $MAX_TOLERANCE -m $MAX_MANITUDE -M $MAX_RESULT -f $SOF_FILE > $OUTPUT_FILE
+#---------------------------
+

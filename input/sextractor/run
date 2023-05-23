@@ -1,0 +1,20 @@
+#!/bin/bash
+#-----------------------------------------------------------
+INPUT_PATH=$1
+FITS_FILE=$2
+CATALOG_NAME=$3
+SEXTRACTOR_CONFIG_FILE=$4
+#-----------------------------------------------------------
+cd $INPUT_PATH
+#-----------------------------------------------------------
+./sex $2 -c $SEXTRACTOR_CONFIG_FILE -CATALOG_NAME $3
+./psfex $3 -c psfex.config
+#----------------------------------
+#extract from the xml the Moffat fwhm and save in a new file
+#214 is the line with the Moffat fwhm
+#use the program 'topcat' with the full xml to know the filed names and the values
+RAW_NAME="${CATALOG_NAME%.*}"
+awk 'NR == 214' $RAW_NAME.xml > $RAW_NAME.moffat.fwhm
+
+#-----------------------------------------------------------
+#end of script

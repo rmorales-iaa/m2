@@ -1,0 +1,28 @@
+#!/bin/bash
+#------------------------------------------
+LOCAL_DIR=/home/rafa/astrometry/vlactea/ash/
+REMOTE_DIR=/ash/
+#------------------------------------------
+BLOCK_SIZE=25165824
+STREAM_BUFFER_SIZE=40960
+BYTES_PER_CHEKSUM=24576
+#------------------------------------------
+FILENAME=""
+#------------------------------------------
+function put_file {
+  FILENAME="${1##*/}"
+  echo "Uploading: '$FILENAME'"
+  hadoop fs -D  dfs.blocksize="$BLOCK_SIZE" -D dfs.stream-buffer-size="STREAM_BUFFER_SIZE" -D dfs.bytes-per-checksum="$BYTES_PER_CHEKSUM"  -put $LOCAL_DIR$FILENAME $REMOTE_DIR$FILENAME
+}
+#------------------------------------------
+
+hadoop fs -mkdir $REMOTE_DIR
+
+for f in $ $LOCAL_DIR*
+do
+  put_file $f
+done
+
+#------------------------------------------
+#enf of file
+#------------------------------------------

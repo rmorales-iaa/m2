@@ -1,0 +1,5 @@
+#!/bin/bash
+#------------------------------------
+cd /home/rafa/proyecto/m2/input/astrometry.net
+./wcs_classic_parallel_solve_fits.bash $1 $2
+#------------------------------------
